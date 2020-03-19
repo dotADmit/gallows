@@ -6,7 +6,7 @@ namespace gallows
 {
     class GameLogic
     {
-        public readonly object word;
+        public readonly string word;
 
         public GameLogic(string word)
         {
