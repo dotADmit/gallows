@@ -7,17 +7,19 @@ namespace gallows
 {
     class GameData
     {
-        public readonly string[] dataAr;
+        public readonly int Tries;
+        public readonly string[] DataAr;
         private const string FILE_PATH = @"C:\Users\Дмитрий\Desktop\C#\taski\WordsStockRus.txt";
 
-        public GameData()
+        public GameData(int tries)
         {
-            dataAr = File.ReadAllText(FILE_PATH).Split(new char[] { '\r', '\n' }, StringSplitOptions.RemoveEmptyEntries);
+            DataAr = File.ReadAllText(FILE_PATH).Split(new char[] { '\r', '\n' }, StringSplitOptions.RemoveEmptyEntries);
+            Tries = tries;
         }
         public string GetWord()
         {
             Random rnd = new Random();
-            return dataAr[rnd.Next(0, dataAr.Length - 1)];
+            return DataAr[rnd.Next(0, DataAr.Length - 1)];
         }
     }
 }

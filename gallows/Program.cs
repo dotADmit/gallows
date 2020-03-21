@@ -7,10 +7,11 @@ namespace gallows
     {
         static void Main(string[] args)
         {
-            GameData data = new GameData();
-            int tries = 6;
+            GameData data = new GameData(6);
+            int tries = data.Tries;
             bool isWinner = false;
             string word = data.GetWord();
+            string triedLetters = "";
             List<string> userLetters = new List<string>();
             while (tries > 0)
             {
@@ -19,26 +20,15 @@ namespace gallows
                     isWinner = true;
                     break;
                 }
-                Console.WriteLine(PrintWord(word, userLetters));
 
-                Console.WriteLine();
+                Console.WriteLine(PrintWord(word, userLetters));
                 Console.WriteLine($"Количество жизней: {tries}");
-                foreach (var item in userLetters)
-                {
-                    if (!word.Contains(item))
-                    {
-                        Console.Write($"-{item.ToUpper()} ");
-                    }
-                }
-                Console.WriteLine();
-                Console.Write(tries == 1 ? "Введите слово: " : "Введите букву: ");
+                Console.WriteLine(triedLetters);
+                Console.Write("Введите букву: ");
+
                 string temp = Console.ReadLine();
                 userLetters.Add(temp);
-                if (temp == word)
-                {
-                    isWinner = true;
-                    break;
-                }
+
                 Console.Clear();
 
                 if (word.Contains(temp))
@@ -49,6 +39,7 @@ namespace gallows
                 if(tries > 1)
                     Console.WriteLine("Такой буквы нет!");
                 tries--;
+                triedLetters += $"-{temp.ToUpper()} ";
             }
 
             Console.WriteLine(isWinner ? "Поздравляем!!! Вы угадали слово!!!" : "Вы не угадали слово =(") ;
